@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Autenticação (login)</li>
+    </ol>
+  </nav>
+  <div th:if="${param.error}">
+    <h6 class="alert alert-danger">Usuario/senha inválidos</h6>
+  </div>
+  <form th:action="@{/login}" method="post">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="text" name="username" placeholder="E-mail" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input class="form-control" type="password" name="password" placeholder="Senha" />
+    </div>
+    <input class="btn btn-primary" type="submit" value="Log in" />
+  </form>
+</div>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Relatório de apartamentos</li>
+    </ol>
+  </nav>
+  <div th:if="${mensagem}">
+    <h6 class="p-3 mb-2 bg-warning text-dark" th:text="${mensagem}">erro</h6>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Proprietário</th>
+        <th scope="col">Quartos</th>
+        <th scope="col">Número</th>
+        <th scope="col">Tipo de Ocupação</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="apto : ${apartamentos}">
+        <th scope="row" th:text="${apto.id}"></th>
+        <td th:text="${apto.proprietario.nome}"></td>
+        <td th:text="${apto.quantidadeDeQuartos}"></td>
+        <td th:text="${apto.numeroDoApartamento}"></td>
+        <td th:text="${apto.tipoDeOcupacao}"></td>
+        <td>
+          <a th:href="@{/upload(id=${apto.id})}" sec:authorize-url="/upload">Adicionar foto</a>
+          <a th:href="@{/fotos_apto(id=${apto.id})}" sec:authorize-url="/fotos_apto">Ver fotos</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</html>

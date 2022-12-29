@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+
+<div th:fragment="conteudo" class="p-3 mb-2 bg-warning text-dark">
+  <h4>Erro</h4>
+  <div th:if="${message}">
+    <h6 th:text="${message}"></h6>
+  </div>
+  <hr>
+ 
+</div>
+
+</html>

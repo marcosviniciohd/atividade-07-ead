@@ -1,0 +1,65 @@
+<!doctype html>
+<html th:fragment="modelo">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema Condominio MVC SQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Apartamentos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/rel_apto" sec:authorize-url="/rel_apto">Listagem</a></li>
+                            <li><a class="dropdown-item" href="/cad_apto" sec:authorize-url="/cad_apto">Novo</a></li>
+                        </ul>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Proprietários
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/rel_prop" sec:authorize-url="/rel_prop">Listagem</a></li>
+                            <li><a class="dropdown-item" href="/cad_prop" sec:authorize-url="/cad_prop">Novo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Alteração do fragmento da barra de navegação para adicionar botão de logout e saudação do usuário logado -->
+            <div class="col-3 text-white small" sec:authorize="isAuthenticated()">
+                <span sec:authentication="name">opa</span>
+                <span sec:authentication="principal.authorities"></span>
+            </div>
+
+            <div class="align-self-center">
+                <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                    <input class="btn btn-secondary btn-sm p-1 small" type="submit" value="Sair" />
+                </form>
+                <a href="/login" sec:authorize="!isAuthenticated()" class="btn btn-secondary btn-sm p-1 small">Entrar</a>
+            </div>
+            <!-- Alteração do fragmento da barra de navegação para adicionar botão de logout e saudação do usuário logado -->
+
+        </div>
+    </nav>
+    <main th:replace="this :: conteudo"></main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+
+</html>

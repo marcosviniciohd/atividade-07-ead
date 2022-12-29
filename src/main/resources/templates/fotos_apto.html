@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Fotos</li>
+    </ol>
+  </nav>
+  <div class="card mb-3">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-4 align-self-center">Fotos do apartamento <span class="badge text-bg-success" th:text="${dados.numeroDoApartamento}"></span></div>
+        <div class="col-8">
+          <div class="row">
+            <span class="col-4">Proprietário</span>
+            <span class="col-4 rounded-1 px-1 bg-success text-light" th:text="${dados.proprietario.nome}">Proprietário</span>
+          </div>
+          <div class="row">
+            <span class="col-4">Quantidade de quartos</span>
+            <span class="col-4 rounded-1 px-1 bg-success text-light" th:text="${dados.quantidadeDeQuartos}">Quantidade de quartos</span>
+          </div>
+          <div class="row">
+            <span class="col-4">Tipo de ocupação</span>
+            <span class="col-4 rounded-1 px-1 bg-success text-light" th:text="${dados.tipoDeOcupacao}">Tipo de ocupação</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-3 g-4">
+    <div th:each="foto, status : ${fotos}" class="col">
+      <div class="card border border-secondary">
+        <div class="card-header d-inline-flex justify-content-between">
+          <h3>Foto <span th:text="${status.count}"></span></h3>
+          <a th:href="@{excluir_foto(id=${foto.id})}" class="btn btn-danger">Excluir</a>
+        </div>
+        <img th:src="|image-upload/${foto.url}|" style="height: 280px; width: auto; object-fit: scale-down;">
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

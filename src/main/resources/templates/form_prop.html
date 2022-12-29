@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Novo proprietário</li>
+    </ol>
+  </nav>
+  <form th:action="@{/cad_prop}" method="post" th:object="${proprietario}">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control" th:field="*{nome}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+    </div>
+    <div class="mb-3">
+      <label for="telefone" class="form-label">Telefone</label>
+      <input type="text" class="form-control" th:field="*{telefone}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+  </form>
+</div>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+
+<div th:fragment="conteudo">
+  <div th:if="${message}">
+    <div class="p-3 mb-2 bg-warning text-dark" th:text="${message}"></div>
+  </div>
+  <form method="POST" enctype="multipart/form-data" th:action="@{/upload}">
+    <input type="hidden" name="id" th:value="${id}">
+    <div class="mb-3">
+      <input class="form-control" type="file" name="file">
+    </div>
+    <div class="mb-3">
+      <input type="submit" class="btn btn-primary mb-3" />
+    </div>
+  </form>
+</div>
+
+</html>

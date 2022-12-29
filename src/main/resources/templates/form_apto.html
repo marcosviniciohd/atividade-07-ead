@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Novo apartamento</li>
+    </ol>
+  </nav>
+  <form th:action="@{/cad_apto}" method="post" th:object="${apartamento}">
+    <div class="mb-3">
+      <label class="form-label">Quantidade de quartos</label>
+      <input type="text" class="form-control" th:field="*{quantidadeDeQuartos}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('quantidadeDeQuartos')}" th:errors="*{quantidadeDeQuartos}"></div>
+    </div>
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Número do apartamento</label>
+      <input type="text" class="form-control" th:field="*{numeroDoApartamento}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('numeroDoApartamento')}" th:errors="*{numeroDoApartamento}"></div>
+
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tipo de ocupação</label>
+      <select class="form-control" th:field="*{tipoDeOcupacao}">
+        <option value="proprietário">Proprietário</option>
+        <option value="inquilino">Inquilino</option>
+        <option value="vazio">Vazio</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Proprietário</label>
+      <select th:field="*{proprietario.id}" class="form-control">
+        <option th:each="prop : ${proprietarios}" th:value="${prop.id}" th:text="${prop.nome}">
+        </option>
+      </select>
+    </div>
+
+    <input type="submit" class="btn btn-primary" />
+  </form>
+</div>
+
+</html>

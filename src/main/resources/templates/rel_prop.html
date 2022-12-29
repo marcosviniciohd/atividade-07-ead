@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html th:include="template :: modelo">
+<div th:fragment="conteudo">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Relatório de proprietários</li>
+    </ol>
+  </nav>
+  <div th:if="${mensagem}" th:text="${mensagem}" class="p-3 mb-2 bg-warning text-dark">
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="prop : ${proprietarios}">
+        <th scope="row" th:text="${prop.id}"></th>
+        <td th:text="${prop.nome}"></td>
+        <td th:text="${prop.telefone}"></td>
+        <td>
+          <a th:href="@{/excluir_prop(id=${prop.id})}">Apagar</a>
+          Alterar
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</html>
